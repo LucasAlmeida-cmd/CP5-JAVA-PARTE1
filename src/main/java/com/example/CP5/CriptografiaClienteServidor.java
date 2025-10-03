@@ -9,10 +9,17 @@ package com.example.CP5;
  * @author MSWagner
  */
 
-import javax.crypto.Cipher;
-import java.security.*;
+import java.security.KeyPairGenerator;
+import java.security.NoSuchAlgorithmException;
+import java.security.PrivateKey;
+import java.security.PublicKey;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.Base64;
+
+import javax.crypto.Cipher;
+
+import java.security.KeyFactory;
+import java.security.KeyPair;
 
 public class CriptografiaClienteServidor {
    public static KeyPair gerarChavesPublicoPrivada() throws NoSuchAlgorithmException{
@@ -22,8 +29,8 @@ public class CriptografiaClienteServidor {
       return par;
    }
 
-   public static String 
-         cifrar(String mensagem, PublicKey publicKey) throws Exception {
+   public static String
+   cifrar(String mensagem, PublicKey publicKey) throws Exception {
 
       byte[] messageToBytes = mensagem.getBytes();
       Cipher cifrador = Cipher.getInstance("RSA/ECB/PKCS1Padding");
@@ -35,8 +42,8 @@ public class CriptografiaClienteServidor {
       return Base64.getEncoder().encodeToString(bytesCripto);
    }
 
-   public static String 
-         decifrar(String mensagem, PrivateKey privateKey) throws Exception {
+   public static String
+   decifrar(String mensagem, PrivateKey privateKey) throws Exception {
 
       byte[] bytesCifrados = Base64.getDecoder().decode(mensagem);
       Cipher cifrador = Cipher.getInstance("RSA/ECB/PKCS1Padding");
